@@ -1,9 +1,0 @@
-Dev Plan
------------------------------------------
-. Change database to SQLite
-. Change Landing page - Some responsive Image + Page
-.  Add Schema
-. Create New Question Page
-. Create Revision Page
-
-. 

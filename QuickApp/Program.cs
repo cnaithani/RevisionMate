@@ -45,24 +45,18 @@ namespace QuickApp
             app.Run();
         }
 
+
         private static void AddServices(WebApplicationBuilder builder)
         {
-            //var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ??
-            //                throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ??
+                            throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
             var authServerUrl = builder.Configuration["AuthServerUrl"].TrimEnd('/');
 
             string migrationsAssembly = typeof(Program).GetTypeInfo().Assembly.GetName().Name; //QuickApp
 
-            //builder.Services.AddDbContext<ApplicationDbContext>(options =>
-            //    options.UseSqlServer(connectionString, b => b.MigrationsAssembly(migrationsAssembly)));
-
-
-            var path = Environment.CurrentDirectory;
-            var DbPath = System.IO.Path.Join(path, "AppData\\RevisionMate.db3");
-
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(String.Concat("Data Source = ", DbPath), b => b.MigrationsAssembly(migrationsAssembly)));
+                options.UseSqlServer(connectionString, b => b.MigrationsAssembly(migrationsAssembly)));
 
             // add identity
             builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
