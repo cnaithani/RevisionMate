@@ -83,6 +83,7 @@ namespace QuickApp.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false).Annotation("SqlServer:Identity", "1, 1"),
                     JobTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Configuration = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -109,7 +110,9 @@ namespace QuickApp.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.UniqueConstraint("UK_AspNetUsers", x => x.UserId);
                 });
+            
 
             migrationBuilder.CreateTable(
                 name: "AppProducts",
