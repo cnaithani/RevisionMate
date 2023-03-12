@@ -61,6 +61,7 @@ import { UserPreferencesComponent } from './components/controls/user-preferences
 import { UsersManagementComponent } from './components/controls/users-management.component';
 import { RolesManagementComponent } from './components/controls/roles-management.component';
 import { RoleEditorComponent } from './components/controls/role-editor.component';
+import { AreaComponent } from './components/area/area.component';
 
 
 @NgModule({
@@ -82,7 +83,8 @@ import { RoleEditorComponent } from './components/controls/role-editor.component
     EqualValidator,
     AutofocusDirective,
     BootstrapTabDirective,
-    GroupByPipe
+    GroupByPipe,
+    AreaComponent
   ],
   imports: [
     BrowserModule,

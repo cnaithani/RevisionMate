@@ -14,6 +14,7 @@ namespace DAL
 {
     public interface IUnitOfWork
     {
+        IAreaMasterRepository AreaMaster { get; }
         ICustomerRepository Customers { get; }
         IProductRepository Products { get; }
         IOrdersRepository Orders { get; }

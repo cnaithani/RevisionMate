@@ -17,6 +17,7 @@ namespace DAL
     {
         readonly ApplicationDbContext _context;
 
+        IAreaMasterRepository _areaMaster;
         ICustomerRepository _customers;
         IProductRepository _products;
         IOrdersRepository _orders;
@@ -29,6 +30,16 @@ namespace DAL
         }
 
 
+        public IAreaMasterRepository AreaMaster
+        {
+            get
+            {
+                if (_areaMaster == null)
+                    _areaMaster = new AreaMasterRepository(_context);
+
+                return _areaMaster;
+            }
+        }
 
         public ICustomerRepository Customers
         {

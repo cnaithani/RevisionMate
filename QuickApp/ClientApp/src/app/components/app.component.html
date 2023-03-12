@@ -20,6 +20,9 @@
             <a class="nav-link" routerLink=""><i class="fa fa-home"></i></a>
           </li>
           <li class="nav-item" routerLinkActive="active" *ngIf="canViewCustomers">
+            <a class="nav-link" routerLink="/area">{{'mainMenu.Areas' | translate}}</a>
+          </li>
+          <li class="nav-item" routerLinkActive="active" *ngIf="canViewCustomers">
             <a class="nav-link" routerLink="/customers">{{'mainMenu.Customers' | translate}}</a>
           </li>
           <li class="nav-item" routerLinkActive="active" *ngIf="canViewProducts">
