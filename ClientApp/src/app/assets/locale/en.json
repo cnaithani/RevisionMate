@@ -17,6 +17,7 @@
     "Dashboard": "Dashboard",
     "Customers": "Customers",
     "Products": "Products",
+    "Areas": "Topics",
     "Orders": "Orders",
     "NotFound": "Not-Found",
     "About": "About",
@@ -45,6 +46,12 @@
       "UserDepartments": "User Departments",
       "UsersManagements": "Users Managements",
       "RolesManagement": "Roles Management"
+    }
+  },
+  "areas": {
+    "management": {
+      "AreaCode": "Topic Code",
+      "AreaDesc": "Topic Description"
     }
   },
   "preferences": {

@@ -1,0 +1,36 @@
+<header class="pageHeader">
+  <h3><i class="fa fa-cog fa-lg page-caption" aria-hidden="true"></i> {{'pageHeader.Areas' | translate}}</h3>
+</header>
+
+<div class="row control-box">
+  <div class="col-lg-8">
+    <div class="search-box">
+      <app-search-box (searchChange)="onSearchChanged($event)" placeholder="{{'todoDemo.management.Search' | translate}}"></app-search-box>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <ul class="nav flex-row">
+      <li [class.active]="hideCompletedTasks" class="nav-item toolbaritem">
+        <a class="nav-link" href="javascript:;" (click)="hideCompletedTasks = !hideCompletedTasks"><i class="fa fa-eye-slash"></i> {{'todoDemo.management.HideCompleted' | translate}}</a>
+      </li>
+      <li class="nav-item toolbaritem">
+        <a class="nav-link" href="javascript:;" (click)="addTask()"><i class="fa fa-plus"></i> {{'todoDemo.management.AddTask' | translate}}</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<ngx-datatable class="material colored-header sm table-x table-striped table-hover"
+               [loadingIndicator]="loadingIndicator"
+               [rows]="rows"
+               [rowHeight]="35"
+               [headerHeight]="37"
+               [footerHeight]="35"
+               [columns]="columns"
+               [scrollbarV]="true"
+               [columnMode]="'force'">
+</ngx-datatable>
+
+<ng-template #indexTemplate let-value="value">
+  <strong>{{value}}</strong>
+</ng-template>

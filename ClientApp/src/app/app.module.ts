@@ -33,6 +33,8 @@ import { LocalStoreManager } from './services/local-store-manager.service';
 import { OidcHelperService } from './services/oidc-helper.service';
 import { NotificationService } from './services/notification.service';
 import { NotificationEndpoint } from './services/notification-endpoint.service';
+import { AreaService } from './services/area-service.service';
+import { AreasEndpoint } from './services/area-endpoint.service';
 import { AccountService } from './services/account.service';
 import { AccountEndpoint } from './services/account-endpoint.service';
 
@@ -112,6 +114,8 @@ import { AreaComponent } from './components/area/area.component';
   ],
   providers: [
     { provide: ErrorHandler, useClass: AppErrorHandler },
+    AreasEndpoint,
+    AreaService,
     AlertService,
     ThemeManager,
     ConfigurationService,
