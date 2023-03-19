@@ -14,7 +14,7 @@
         <a class="nav-link" href="javascript:;" (click)="hideCompletedTasks = !hideCompletedTasks"><i class="fa fa-eye-slash"></i> {{'todoDemo.management.HideCompleted' | translate}}</a>
       </li>
       <li class="nav-item toolbaritem">
-        <a class="nav-link" href="javascript:;" (click)="addTask()"><i class="fa fa-plus"></i> {{'todoDemo.management.AddTask' | translate}}</a>
+        <a class="nav-link" href="javascript:;" (click)="addTask()"><i class="fa fa-plus"></i> {{'areas.management.Add' | translate}}</a>
       </li>
     </ul>
   </div>
@@ -34,3 +34,60 @@
 <ng-template #indexTemplate let-value="value">
   <strong>{{value}}</strong>
 </ng-template>
+
+<div class="modal fade" bsModal #editorModal="bs-modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title float-start"><i class="fa fa-tasks"></i> {{'areas.editor.NewArea' | translate}}</h5>
+        <button type="button" class="btn-close fs-sm" title="Close" (click)="editorModal.hide()"></button>
+      </div>
+      <div class="modal-body">
+        <form *ngIf="formResetToggle" name="taskEditorForm" #f="ngForm" novalidate
+              (ngSubmit)="f.form.valid ? save() :
+                      (!taskName.valid && showErrorAlert('Task name is required', 'Please enter a name for the task'));">
+
+
+          <div class="mb-3 row">
+            <label class="col-form-label col-md-3" for="taskName">{{'areas.editor.Name' | translate}}:</label>
+            <div class="col-md-9">
+              <input appAutofocus type="text" id="taskName" name="taskName" placeholder="Enter area name" class="form-control" [ngClass]="{'is-valid': f.submitted && taskName.valid, 'is-invalid' : f.submitted && !taskName.valid}"
+                     [(ngModel)]="areaEdit.name" #taskName="ngModel" required />
+              <span *ngIf="f.submitted && !taskName.valid" class="invalid-feedback">
+                {{'todoDemo.editor.TaskNameRequired' | translate}}
+              </span>
+            </div>
+          </div>
+
+          <div class="mb-3 row description-form-group">
+            <label class="col-form-label col-md-3" for="taskDescription">{{'areas.editor.Description' | translate}}:</label>
+            <div class="col-md-9">
+              <input type="text" id="taskDescription" name="taskDescription" placeholder="Enter area description" class="form-control" [(ngModel)]="areaEdit.description" />
+            </div>
+          </div>
+          <!--
+          <div class="row">
+            <label class="col-form-label col-md-3"> </label>
+            <div class="col-md-9">
+              <div class="form-check">
+                <input class="form-check-input" id="isImportant" name="isImportant" type="checkbox" [(ngModel)]="taskEdit.important">
+                <label for="isImportant" class="form-check-label">{{'todoDemo.editor.Important' | translate}}</label>
+              </div>
+            </div>
+          </div>
+          -->
+          <div class="row">
+            <div class="col-md-12">
+              <hr class="hr-separator" />
+            </div>
+          </div>
+
+          <div class="float-end">
+            <button type="submit" class="btn btn-primary">{{'areas.editor.AddArea' | translate}}</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

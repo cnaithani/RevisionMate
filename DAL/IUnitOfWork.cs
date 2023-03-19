@@ -3,6 +3,7 @@
 // www.ebenmonney.com/templates
 // =============================
 
+using DAL.Models;
 using DAL.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace DAL
 {
     public interface IUnitOfWork
     {
+        public ApplicationUser CurrentUser { get; }
         IAreaMasterRepository AreaMaster { get; }
         ICustomerRepository Customers { get; }
         IProductRepository Products { get; }

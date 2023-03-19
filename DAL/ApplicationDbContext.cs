@@ -1,7 +1,4 @@
-﻿// =============================
-// Email: info@ebenmonney.com
-// www.ebenmonney.com/templates
-// =============================
+﻿
 
 using DAL.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -19,20 +16,15 @@ namespace DAL
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
         public string CurrentUserId { get; set; }
-
         public DbSet<AreaMaster> AreaMaster { get; set; }
+        //public DbSet<AspNetUsers> AspNetUsers { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
-
-
-
         public ApplicationDbContext(DbContextOptions options) : base(options)
         { }
-
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -72,38 +64,26 @@ namespace DAL
             builder.Entity<OrderDetail>().Property(p => p.UnitPrice).HasColumnType(priceDecimalType);
             builder.Entity<OrderDetail>().Property(p => p.Discount).HasColumnType(priceDecimalType);
         }
-
-
-
-
         public override int SaveChanges()
         {
             UpdateAuditEntities();
             return base.SaveChanges();
         }
-
-
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
             UpdateAuditEntities();
             return base.SaveChanges(acceptAllChangesOnSuccess);
         }
-
-
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
             UpdateAuditEntities();
             return base.SaveChangesAsync(cancellationToken);
         }
-
-
         public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default(CancellationToken))
         {
             UpdateAuditEntities();
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
-
-
         private void UpdateAuditEntities()
         {
             var modifiedEntries = ChangeTracker.Entries()

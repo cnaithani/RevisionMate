@@ -51,7 +51,14 @@
   "areas": {
     "management": {
       "AreaCode": "Topic Code",
-      "AreaDesc": "Topic Description"
+      "AreaDesc": "Topic Description",
+      "Add": "Add Topic"
+    },
+    "editor": {
+      "Name": "Code",
+      "Description": "Description",
+      "NewArea": "Add New Topic",
+      "AddArea": "Add Topic"    
     }
   },
   "preferences": {

@@ -1,4 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 import { AlertService, DialogType, MessageSeverity } from '../../services/alert.service';
 import { AppTranslationService } from '../../services/app-translation.service';
 import { Utilities } from '../../services/utilities';
@@ -14,10 +15,10 @@ export class AreaComponent implements OnInit {
   columns: any[] = [];
   rows: Area[] = [];
   rowsCache: Area[] = [];
-  editedArea: Area;
-  sourceArea: Area;
-  editingAreaName: { name: string };
+  editing = {};
+  areaEdit: any = {};
   loadingIndicator: boolean;
+  formResetToggle = true;
   _hideCompletedTasks = false;
 
   @ViewChild('indexTemplate', { static: true })
@@ -25,6 +26,9 @@ export class AreaComponent implements OnInit {
 
   @ViewChild('userNameTemplate', { static: true })
   userNameTemplate: TemplateRef<any>;
+
+  @ViewChild('editorModal', { static: true })
+  editorModal: ModalDirective;
 
   constructor(private alertService: AlertService, private translationService: AppTranslationService, private areaService: AreaService) { }
 
@@ -65,23 +69,33 @@ export class AreaComponent implements OnInit {
   }
 
   addTask() {
-    /*
     this.formResetToggle = false;
 
     setTimeout(() => {
       this.formResetToggle = true;
 
-      this.taskEdit = {};
+      this.areaEdit = {};
       this.editorModal.show();
     });
-    */
+    
+  }
+
+  save() {
+    alert("Hello!");
+    this.rowsCache.splice(0, 0, this.areaEdit);
+    this.rows.splice(0, 0, this.areaEdit);
+    this.refreshDataIndexes(this.rowsCache);
+    this.rows = [...this.rows];
+
+    this.saveToDisk();
+    this.editorModal.hide();
   }
 
   loadData() {
     this.alertService.startLoadingMessage();
     this.loadingIndicator = true;
 
-    this.areaService.getAreas('1').subscribe(results => this.onDataLoadSuccessful(results), error => this.onDataLoadFailed(error));
+    this.areaService.getAreas().subscribe(results => this.onDataLoadSuccessful(results), error => this.onDataLoadFailed(error));
 
   }
 
@@ -103,6 +117,20 @@ export class AreaComponent implements OnInit {
 
     this.alertService.showStickyMessage('Load Error', `Unable to retrieve topics from the server.\r\nErrors: "${Utilities.getHttpResponseMessages(error)}"`,
       MessageSeverity.error, error);
+  }
+
+  refreshDataIndexes(data) {
+    let index = 0;
+
+    for (const i of data) {
+      i.$$index = index++;
+    }
+  }
+
+  saveToDisk() {
+    this.loadingIndicator = true;
+    this.areaService.saveAreas(this.areaEdit).subscribe(results => this.onDataLoadSuccessful(results), error => this.onDataLoadFailed(error));
+    this.loadingIndicator = false;
   }
 
 }

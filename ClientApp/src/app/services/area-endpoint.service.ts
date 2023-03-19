@@ -15,21 +15,30 @@ import { ConfigurationService } from './configuration.service';
 
 @Injectable()
 export class AreasEndpoint extends EndpointBase {
-
-  get areasUrl() { return this.configurations.baseUrl + '/api/AreaMaster'; }
-
+  endpointUrl = 'https://localhost:44350';
+  get getAreasUrl() { return this.endpointUrl + '/api/AreaMaster'; }
+  get postAreasUrl() { return this.endpointUrl + '/api/AreaMaster'; }
 
   constructor(private configurations: ConfigurationService, http: HttpClient, authService: AuthService) {
     super(http, authService);
   }
 
 
-  getAreaEndpoint<T>(userId: string): Observable<T> {
-    const endpointUrl = `${this.areasUrl}/${userId}`;
+  getAreaEndpoint<T>(): Observable<T> {
+    const endpointUrl = `${this.getAreasUrl}`;
 
     return this.http.get<T>(endpointUrl, this.requestHeaders).pipe<T>(
       catchError(error => {
-        return this.handleError(error, () => this.getAreaEndpoint(userId));
+        return this.handleError(error, () => this.getAreaEndpoint());
+      }));
+  }
+
+  postAreaEndpoint<T>(areaObject: any): Observable<T> {
+    const endpointUrl = `${this.postAreasUrl}`;
+
+    return this.http.post<T>(endpointUrl, JSON.stringify(areaObject), this.requestHeaders).pipe<T>(
+      catchError(error => {
+        return this.handleError(error, () => this.postAreaEndpoint(areaObject));
       }));
   }
 

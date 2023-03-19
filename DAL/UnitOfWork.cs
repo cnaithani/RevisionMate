@@ -6,8 +6,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using DAL.Models;
 using DAL.Repositories;
 using DAL.Repositories.Interfaces;
 
@@ -21,14 +23,23 @@ namespace DAL
         ICustomerRepository _customers;
         IProductRepository _products;
         IOrdersRepository _orders;
-
+        ApplicationUser _user ;
 
 
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
         }
+        public ApplicationUser CurrentUser
+        {
+            get
+            {
+                if (_user == null && !String.IsNullOrEmpty(_context.CurrentUserId))
+                    _user = _context.Find<ApplicationUser>(_context.CurrentUserId);
 
+                return _user;
+            }
+        }
 
         public IAreaMasterRepository AreaMaster
         {
