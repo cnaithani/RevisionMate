@@ -81,7 +81,7 @@ export class AreaComponent implements OnInit {
   }
 
   save() {
-    alert("Hello!");
+    //alert("Hello!");
     this.rowsCache.splice(0, 0, this.areaEdit);
     this.rows.splice(0, 0, this.areaEdit);
     this.refreshDataIndexes(this.rowsCache);

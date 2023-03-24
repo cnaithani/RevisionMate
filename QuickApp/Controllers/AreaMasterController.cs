@@ -21,7 +21,7 @@ namespace QuickApp.Controllers
         private readonly ILogger _logger;
         private readonly IEmailSender _emailSender;
         private readonly IAuthorizationService _authorizationService;
-        private readonly IAccountManager _accountManager;
+        //private readonly IAccountManager _accountManager;
         private const string GetAreasActionName = "GetAreasByUserId";
 
         public AreaMasterController(IMapper mapper, IUnitOfWork unitOfWork, ILogger<CustomerController> logger, IEmailSender emailSender, 
@@ -31,7 +31,7 @@ namespace QuickApp.Controllers
             _unitOfWork = unitOfWork;
             _logger = logger;
             _emailSender = emailSender;
-            _authorizationService = authorizationService;
+            //_authorizationService = authorizationService;
         }
 
         // GET: api/values

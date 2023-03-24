@@ -13,6 +13,8 @@ import { LocalStoreManager } from './local-store-manager.service';
 import { ConfigurationService } from './configuration.service';
 import { DBkeys } from './db-keys';
 import { LoginResponse } from '../models/login-response.model';
+import { Console } from 'console';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class OidcHelperService {
@@ -20,7 +22,7 @@ export class OidcHelperService {
   private readonly clientId = 'quickapp_spa';
   private readonly scope = 'openid email phone profile offline_access roles quickapp_api';
 
-  private readonly tokenEndpoint = '/connect/token';
+  private readonly tokenEndpoint = environment.baseUrl + '/connect/token';
 
   constructor(
     private http: HttpClient,
@@ -39,7 +41,6 @@ export class OidcHelperService {
       .append('client_id', this.clientId)
       .append('grant_type', 'password')
       .append('scope', this.scope);
-
     return this.http.post<LoginResponse>(this.tokenEndpoint, params, { headers: header });
   }
 

@@ -8,6 +8,8 @@ using DAL.Core;
 using DAL.Core.Interfaces;
 using DAL.Models;
 using IdentityServer4.AccessTokenValidation;
+using IdentityServer4.Configuration;
+using IdentityServer4.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,6 +26,7 @@ using QuickApp.Authorization;
 using QuickApp.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using AppPermissions = DAL.Core.ApplicationPermissions;
@@ -201,6 +204,7 @@ namespace QuickApp
                 .AllowAnyOrigin()
                 .AllowAnyHeader()
                 .AllowAnyMethod());
+
 
             app.UseIdentityServer();
             app.UseAuthorization();

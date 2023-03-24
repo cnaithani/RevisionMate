@@ -34,8 +34,8 @@ namespace DAL
         {
             get
             {
-                if (_user == null && !String.IsNullOrEmpty(_context.CurrentUserId))
-                    _user = _context.Find<ApplicationUser>(_context.CurrentUserId);
+                //if (_user == null && !String.IsNullOrEmpty(_context.CurrentUserId))
+                //    _user = _context.Find<ApplicationUser>(_context.CurrentUserId);
 
                 return _user;
             }
